@@ -127,6 +127,7 @@
                     'Secadora': document.getElementById('select-secadoras'),
                     'Planchado y Otros': document.getElementById('select-planchadoras')
                 };
+                console.log('Selects encontrados:', selects);
 
                 APP_DATA.equipment.forEach(eq => {
                     let group = null;
@@ -134,10 +135,13 @@
                     else if (eq.tipo.toLowerCase().includes('secadora')) group = 'Secadora';
                     else group = 'Planchado y Otros';
 
-                    const option = document.createElement('option');
-                    option.value = eq.modelo;
-                    option.textContent = `${eq.modelo} (${eq.tipo})`;
-                    selects[group].appendChild(option);
+                    // Solo agrega si el select existe
+                    if (selects[group]) {
+                        const option = document.createElement('option');
+                        option.value = eq.modelo;
+                        option.textContent = `${eq.modelo} (${eq.tipo})`;
+                        selects[group].appendChild(option);
+                    }
                 });
             }
 
